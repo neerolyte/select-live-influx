@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  node:
+    image: node:12.17.0
+    init: true
+    volumes:
+      - "$PWD:/repo"
+    working_dir: /repo
+    command: tail -f /dev/null
+  influxdb:
+    image: influxdb:1.7.10
+  grafana:
+    image: grafana/grafana:7.0.1
+    ports: ["3000:3000"]

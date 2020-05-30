@@ -1,0 +1,15 @@
+{
+  "name": "select-live-influx",
+  "version": "0.0.0",
+  "description": "select.live influx integration",
+  "main": "index.js",
+  "dependencies": {
+    "influx": "^5.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
