@@ -4,6 +4,7 @@
   "description": "select.live influx integration",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "influx": "^5.5.1"
   },
   "devDependencies": {},
