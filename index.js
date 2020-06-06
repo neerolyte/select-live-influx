@@ -1,4 +1,9 @@
 require("dotenv").config();
+const logger = require('pino')({
+  level: process.env.LOG_LEVEL || 'info',
+})
+logger.info('Starting up')
+
 const http = require('http');
 const Influx = require('influx');
 const Host = require('./lib/SelectLive').Host;
@@ -41,8 +46,7 @@ const influx = new Influx.InfluxDB({
 })
 
 function writePoint(data) {
-  console.log(`Writing:`)
-  console.log(data)
+  logger.debug(`Writing ${JSON.stringify(data,)}`)
   influx.writePoints([
     {
       measurement: 'point',
@@ -51,12 +55,14 @@ function writePoint(data) {
       timestamp: data.timestamp,
     }
   ]).then(() => {
-    console.log("Wrote points!\n")
+    logger.info("Wrote points!")
   })
 };
 
 host.getDevice().then((device) => {
-  return device.getPoint()
-}).then((data) => {
-  writePoint(data);
+  setInterval(() => {
+    device.getPoint().then((data) => {
+      writePoint(data);
+    })
+  }, 2000)
 })
