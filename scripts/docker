@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+slidir="$(cd "$(dirname "$(dirname "$0")")" && echo "$PWD")"
+exec docker run --rm --network host -w /sli -v "$slidir:/sli" node:12.17.0 "$@"
